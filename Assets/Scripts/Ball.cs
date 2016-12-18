@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-
     public Vector3 initialVelocity;
+
     private Rigidbody rigidBody;
     private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
 	    rigidBody = GetComponent<Rigidbody>();
-	    rigidBody.velocity = initialVelocity;
 	    audioSource = GetComponent<AudioSource>();
-	    audioSource.Play();
+	    rigidBody.useGravity = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void Launch(Vector3 velocity)
+    {
+	    //audioSource.Play();
+        rigidBody.useGravity = true;
+        rigidBody.velocity = velocity;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        GameObject floor = GameObject.Find("Floor");
+        if (other.gameObject == floor)
+        {
+            audioSource.Play();
+        }
+    }
 }
