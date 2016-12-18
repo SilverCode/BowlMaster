@@ -16,10 +16,9 @@ public class CameraControl : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    Vector3 newPos = ball.transform.position + offset;
-	    if (newPos.z < 1829)
+	    if (transform.position.z <= 1829)
 	    {
-	        transform.position = newPos;
+	        transform.position = ball.transform.position + offset;
 	    }
 	}
 }
