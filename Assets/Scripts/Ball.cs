@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
     public Vector3 initialVelocity;
 
+    public bool inPlay = false;
     private Rigidbody rigidBody;
     private AudioSource audioSource;
 
@@ -21,6 +22,7 @@ public class Ball : MonoBehaviour
 	    //audioSource.Play();
         rigidBody.useGravity = true;
         rigidBody.velocity = velocity;
+        inPlay = true;
     }
 
     private void OnCollisionEnter(Collision other)

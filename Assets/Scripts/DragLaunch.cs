@@ -7,30 +7,30 @@ public class DragLaunch : MonoBehaviour
     private Vector3 dragStart, dragEnd;
     private float startTime, endTime;
     private Ball ball;
+    private float MAX_X, MIN_X;
 
 	// Use this for initialization
 	void Start ()
 	{
 	    ball = GetComponent<Ball>();
+
+	    GameObject floor = GameObject.Find("Floor");
+	    MAX_X = (floor.transform.position.x + (floor.transform.localScale.x/2)) - ball.transform.localScale.x;
+	    MIN_X = (floor.transform.position.x - (floor.transform.localScale.x/2)) + ball.transform.localScale.x;
 	}
 
     public void DragStart()
     {
-        // Capture time and position of mouse click
-        Debug.Log("Drag Start");
         dragStart = Input.mousePosition;
         startTime = Time.time;
     }
 
     public void DragEnd()
     {
-        // Launcher the  ball
-        Debug.Log("Drag End");
         dragEnd = Input.mousePosition;
         endTime = Time.time;
 
         float dragDuration = endTime - startTime;
-
 
         float launchSpeedX = (dragEnd.x - dragStart.x) / dragDuration;
         float launchSpeedZ = (dragEnd.y - dragStart.y) / dragDuration;
@@ -40,4 +40,14 @@ public class DragLaunch : MonoBehaviour
         ball.Launch(launchVelocity);
     }
 
+    public void MoveStart(float amount)
+    {
+        if (!ball.inPlay)
+        {
+            Vector3 newBallPosition = ball.transform.position;
+            newBallPosition.x += amount;
+            if (newBallPosition.x < MAX_X && newBallPosition.x > MIN_X)
+                ball.transform.position = newBallPosition;
+        }
+    }
 }
