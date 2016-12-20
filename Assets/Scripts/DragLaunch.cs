@@ -37,7 +37,8 @@ public class DragLaunch : MonoBehaviour
 
         Vector3 launchVelocity = new Vector3(launchSpeedX, 0, launchSpeedZ);
 
-        ball.Launch(launchVelocity);
+        if (!ball.inPlay)
+            ball.Launch(launchVelocity);
     }
 
     public void MoveStart(float amount)
