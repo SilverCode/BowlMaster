@@ -8,6 +8,7 @@ public class DragLaunch : MonoBehaviour
     private float startTime, endTime;
     private Ball ball;
     private float MAX_X, MIN_X;
+    private bool testLaunch = false;
 
 	// Use this for initialization
 	void Start ()
@@ -38,8 +39,12 @@ public class DragLaunch : MonoBehaviour
         Vector3 launchVelocity = new Vector3(launchSpeedX, 0, launchSpeedZ);
 
         if (!ball.inPlay)
-            ball.Launch(new Vector3(0, 0, 600f));
-            //ball.Launch(launchVelocity);
+        {
+            if (testLaunch)
+                ball.Launch(new Vector3(0, 0, 600f));
+            else
+                ball.Launch(launchVelocity);
+        }
     }
 
     public void MoveStart(float amount)

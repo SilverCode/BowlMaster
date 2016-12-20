@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,8 +33,6 @@ public class PinSetter : MonoBehaviour
 
     public void RaisePins()
     {
-        Debug.Log("Raising Pins");
-
         foreach (Pin pin in FindObjectsOfType<Pin>())
         {
             if (pin.isStanding())
@@ -45,8 +44,6 @@ public class PinSetter : MonoBehaviour
 
     public void LowerPins()
     {
-        Debug.Log("Lowering Pins");
-
         foreach (Pin pin in FindObjectsOfType<Pin>())
         {
             if (pin.isStanding())
@@ -58,7 +55,14 @@ public class PinSetter : MonoBehaviour
 
     public void RenewPins()
     {
-        Debug.Log("Renew Pins");
+        GameObject currentPins = GameObject.Find("Pins");
+        String pinsName = currentPins.name;
+        if (currentPins)
+            Destroy(currentPins);
+
+        GameObject newPins = Instantiate(pinSet, new Vector3(0, 5, 1829), Quaternion.identity);
+        newPins.transform.Rotate(0, 180, 0);
+        newPins.name = pinsName;
     }
 
     private void CheckStanding()
