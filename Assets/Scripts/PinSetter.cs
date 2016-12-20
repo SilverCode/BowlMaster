@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PinSetter : MonoBehaviour
 {
     public Text pinsText;
+    public float distanceToRaise = 40;
+    public GameObject pinSet;
 
     private bool shouldCountPins = false;
     private int lastStandingCount = -1;
@@ -27,6 +29,37 @@ public class PinSetter : MonoBehaviour
 	        CheckStanding();
 	    }
 	}
+
+    public void RaisePins()
+    {
+        Debug.Log("Raising Pins");
+
+        foreach (Pin pin in FindObjectsOfType<Pin>())
+        {
+            if (pin.isStanding())
+            {
+                pin.Raise(distanceToRaise);
+            }
+        }
+    }
+
+    public void LowerPins()
+    {
+        Debug.Log("Lowering Pins");
+
+        foreach (Pin pin in FindObjectsOfType<Pin>())
+        {
+            if (pin.isStanding())
+            {
+                pin.Lower(distanceToRaise);
+            }
+        }
+    }
+
+    public void RenewPins()
+    {
+        Debug.Log("Renew Pins");
+    }
 
     private void CheckStanding()
     {
