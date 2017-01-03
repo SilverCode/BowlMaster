@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
+using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 
 public class ActionMaster {
 
     public enum Action { Tidy, Reset, EndTurn, EndGame, Error }
+
+//    private int[] bowls = new int[21];
+    private int bowl = 1;
 
     public Action Bowl(int pins) {
         if (pins < 0 || pins > 10) {
@@ -12,6 +17,15 @@ public class ActionMaster {
         }
 
         if (10 == pins) {
+            bowl += 2;
+            return Action.EndTurn;
+        }
+
+        if (bowl % 2 != 0) {
+            bowl++;
+            return Action.Tidy;
+        } else if (bowl % 2 == 0) {
+            bowl++;
             return Action.EndTurn;
         }
 
