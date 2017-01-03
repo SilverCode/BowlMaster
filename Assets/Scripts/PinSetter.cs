@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +25,7 @@ public class PinSetter : MonoBehaviour
 	    if (shouldCountPins)
 	    {
 	        pinsText.text = CountStanding().ToString();
-	        CheckStanding();
+	        UpdateStandingCountAndSettle();
 	    }
 	}
 
@@ -65,7 +63,7 @@ public class PinSetter : MonoBehaviour
         newPins.name = pinsName;
     }
 
-    private void CheckStanding()
+    private void UpdateStandingCountAndSettle()
     {
         // Update lastStandingCount
         int currentStanding = CountStanding();
@@ -113,12 +111,4 @@ public class PinSetter : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        Pin pin = other.GetComponentInParent<Pin>();
-        if (pin)
-        {
-            Destroy(pin.gameObject);
-        }
-    }
 }

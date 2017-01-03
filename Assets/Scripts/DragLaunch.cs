@@ -8,7 +8,7 @@ public class DragLaunch : MonoBehaviour
     private float startTime, endTime;
     private Ball ball;
     private float MAX_X, MIN_X;
-    private bool testLaunch = false;
+    public bool testLaunch = false;
 
 	// Use this for initialization
 	void Start ()
