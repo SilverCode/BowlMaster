@@ -70,4 +70,22 @@ public class ActionMasterTest {
         }
         Assert.AreEqual(ActionMaster.Action.EndGame, actionMaster.Bowl(1));
     }
+
+    [Test]
+    public void T08TidyAtBowl20AfterStrike() {
+        int[] rolls = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,10};
+        foreach (int roll in rolls) {
+            actionMaster.Bowl(roll);
+        }
+        Assert.AreEqual(ActionMaster.Action.Tidy, actionMaster.Bowl(5));
+    }
+
+    [Test]
+    public void T09TidyAtBowl20AfterNoHit() {
+        int[] rolls = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,10};
+        foreach (int roll in rolls) {
+            actionMaster.Bowl(roll);
+        }
+        Assert.AreEqual(ActionMaster.Action.Tidy, actionMaster.Bowl(0));
+    }
 }
